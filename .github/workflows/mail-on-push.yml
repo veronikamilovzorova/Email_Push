@@ -15,14 +15,16 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
 
           from: veronika.milovzorova@gmail.com
           to: dyer67225@gmail.com
 
-          subject: GitHub Actions — pushi teade
-          body: "Haru ${{ github.ref }} on uuendatud."
-
+          subject: "Push tehtud repositooriumis ${{ github.repository }}"
+          body: |
+            Repositoorium ${{ github.repository }} sai uue pushi.
+            Pushe tegi: ${{ github.event.pusher.name }}
+            Commiti sõnum: ${{ github.event.head_commit.message }}
 
           secure: true
