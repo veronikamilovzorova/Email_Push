@@ -1,0 +1,28 @@
+name: Send Email on Push
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send notification email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+
+          from: veronika.milovzorova@gmail.com
+          to: dyer67225@gmail.com
+
+          subject: GitHub Actions — pushi teade
+          body: "Haru ${{ github.ref }} on uuendatud."
+
+
+          secure: true
